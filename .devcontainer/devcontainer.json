@@ -1,0 +1,13 @@
+{
+	"name": "tenx_missile",
+	"build": {
+		"dockerfile": "Dockerfile",
+	},
+	"extensions": [
+		"ms-python.python",
+		"bungcip.better-toml",
+		"DavidAnson.vscode-markdownlint",
+	],
+	"postCreateCommand": "poetry install",
+	"remoteUser": "vscode"
+}
