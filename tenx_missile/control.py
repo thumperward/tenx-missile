@@ -1,5 +1,6 @@
 from . import *
 
+
 def fire():
     m = MissileLauncher()
     m.left(1500)
