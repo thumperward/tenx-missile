@@ -7,64 +7,7 @@ class MissileLauncher(object):
     _VENDOR_ID = 0x1130
     _PRODUCT_ID = 0x0202
 
-    _CMD_FILL = [
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-        0x00,
-    ]
+    _CMD_FILL = [0x00] * 56
     _STOP = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x08, 0x08]
     _LEFT = [0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x08, 0x08]
     _RIGHT = [0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x08, 0x08]
@@ -77,9 +20,6 @@ class MissileLauncher(object):
     _FIRE = [0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x08, 0x08]
 
     def __init__(self):
-        self.connect()
-
-    def connect(self):
         self._device = usb.core.find(
             idVendor=self._VENDOR_ID, idProduct=self._PRODUCT_ID
         )
@@ -128,15 +68,17 @@ class MissileLauncher(object):
 
     def _send_timed_command(self, command, ms):
         self._send_command(command)
-        if ms:
-            time.sleep(ms / 1000)
-            self.stop()
+        time.sleep(ms / 1000)
+        self.stop()
 
     def _send_command(self, command):
-        self._send_headers()
-        self._device.ctrl_transfer(0x21, 0x09, 0x2, 0x00, command + self._CMD_FILL)
-
-    def _send_headers(self):
         # ord('U'), ord('S'), ord('B'), ord('C') => 85, 83, 66, 67
-        self._device.ctrl_transfer(0x21, 0x09, 0x2, 0x01, [85, 83, 66, 67, 0, 0, 4, 0])
-        self._device.ctrl_transfer(0x21, 0x09, 0x2, 0x01, [85, 83, 66, 67, 0, 64, 2, 0])
+        self._device.ctrl_transfer(
+            0x21, 0x09, 0x2, 0x01, [85, 83, 66, 67, 0, 0, 4, 0]
+        )
+        self._device.ctrl_transfer(
+            0x21, 0x09, 0x2, 0x01, [85, 83, 66, 67, 0, 64, 2, 0]
+        )
+        self._device.ctrl_transfer(
+            0x21, 0x09, 0x2, 0x00, command + self._CMD_FILL
+        )
