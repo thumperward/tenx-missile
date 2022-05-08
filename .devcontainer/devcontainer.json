@@ -8,6 +8,6 @@
 		"bungcip.better-toml",
 		"DavidAnson.vscode-markdownlint",
 	],
-	"postCreateCommand": "poetry install",
+	"postCreateCommand": "poetry install && pre-commit install",
 	"remoteUser": "vscode"
 }
