@@ -22,9 +22,6 @@ class MissileLauncher(object):
     }
 
     def __init__(self):
-        self._connect()
-
-    def _connect(self):
         self._device = usb.core.find(
             idVendor=self._VENDOR_ID, idProduct=self._PRODUCT_ID
         )
@@ -42,28 +39,28 @@ class MissileLauncher(object):
         self._device.set_configuration()
 
     def left(self, ms=500):
-        self._send_timed_command("LEFT", ms)
+        self.send_timed_command("LEFT", ms)
 
     def right(self, ms=500):
-        self._send_timed_command("RIGHT", ms)
+        self.send_timed_command("RIGHT", ms)
 
     def up(self, ms=500):
-        self._send_timed_command("UP", ms)
+        self.send_timed_command("UP", ms)
 
     def down(self, ms=500):
-        self._send_timed_command("DOWN", ms)
+        self.send_timed_command("DOWN", ms)
 
     def upleft(self, ms=500):
-        self._send_timed_command("UPLEFT", ms)
+        self.send_timed_command("UPLEFT", ms)
 
     def downleft(self, ms=500):
-        self._send_timed_command("DOWNLEFT", ms)
+        self.send_timed_command("DOWNLEFT", ms)
 
     def upright(self, ms=500):
-        self._send_timed_command("UPRIGHT", ms)
+        self.send_timed_command("UPRIGHT", ms)
 
     def downright(self, ms=500):
-        self._send_timed_command("DOWNRIGHT", ms)
+        self.send_timed_command("DOWNRIGHT", ms)
 
     def fire(self):
         self.send_command("FIRE")
@@ -71,7 +68,7 @@ class MissileLauncher(object):
     def stop(self):
         self.send_command("STOP")
 
-    def _send_timed_command(self, command, ms):
+    def send_timed_command(self, command, ms=500):
         self.send_command(command)
         time.sleep(ms / 1000)
         self.stop()
