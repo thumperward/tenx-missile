@@ -61,17 +61,17 @@ class MissileLauncher(object):
         self._send_timed_command(self._DOWNRIGHT, ms)
 
     def fire(self):
-        self._send_command(self._FIRE)
+        self.send_command(self._FIRE)
 
     def stop(self):
-        self._send_command(self._STOP)
+        self.send_command(self._STOP)
 
     def _send_timed_command(self, command, ms):
-        self._send_command(command)
+        self.send_command(command)
         time.sleep(ms / 1000)
         self.stop()
 
-    def _send_command(self, command):
+    def send_command(self, command):
         # ord('U'), ord('S'), ord('B'), ord('C') => 85, 83, 66, 67
         self._device.ctrl_transfer(
             0x21, 0x09, 0x2, 0x01, [85, 83, 66, 67, 0, 0, 4, 0]

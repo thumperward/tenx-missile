@@ -23,6 +23,11 @@ Then, restart `udev` with:
 sudo udevadm trigger
 ```
 
+## TODO
+
+-   Permit interactive use. This will mean exposing `_send_command()` directly
+    so that the application can issue the `self._STOP` itself.
+
 ## Acknowledgements
 
 -   <https://www.npmjs.com/package/tenx-usb-missile-launcher-driver>
