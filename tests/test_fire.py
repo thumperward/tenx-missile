@@ -4,6 +4,7 @@ import time
 
 def test_fire():
     m = MissileLauncher()
+    m.left(1500)
     time.sleep(2)
     m.right(1500)
     time.sleep(2)
