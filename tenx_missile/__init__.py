@@ -20,9 +20,9 @@ class MissileLauncher(object):
     _FIRE = [0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x08, 0x08]
 
     def __init__(self):
-        self.connect()
+        self._connect()
 
-    def connect(self):
+    def _connect(self):
         self._device = usb.core.find(
             idVendor=self._VENDOR_ID, idProduct=self._PRODUCT_ID
         )
