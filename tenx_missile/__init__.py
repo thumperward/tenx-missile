@@ -76,16 +76,13 @@ class MissileLauncher(object):
             self.stop()
 
     def send_command(self, command):
-        self._send_headers()
-        self._device.ctrl_transfer(
-            0x21, 0x09, 0x2, 0x00, command + self._CMD_FILL
-        )
-
-    def _send_headers(self):
         # ord('U'), ord('S'), ord('B'), ord('C') => 85, 83, 66, 67
         self._device.ctrl_transfer(
             0x21, 0x09, 0x2, 0x01, [85, 83, 66, 67, 0, 0, 4, 0]
         )
         self._device.ctrl_transfer(
             0x21, 0x09, 0x2, 0x01, [85, 83, 66, 67, 0, 64, 2, 0]
+        )
+        self._device.ctrl_transfer(
+            0x21, 0x09, 0x2, 0x00, command + self._CMD_FILL
         )
