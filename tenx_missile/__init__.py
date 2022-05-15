@@ -71,9 +71,8 @@ class MissileLauncher(object):
 
     def _send_timed_command(self, command, ms):
         self.send_command(command)
-        if ms:
-            time.sleep(ms / 1000)
-            self.stop()
+        time.sleep(ms / 1000)
+        self.stop()
 
     def send_command(self, command):
         # ord('U'), ord('S'), ord('B'), ord('C') => 85, 83, 66, 67

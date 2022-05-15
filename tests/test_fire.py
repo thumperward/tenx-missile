@@ -17,4 +17,4 @@ def test_fire():
     m.up(1500)
     time.sleep(2)
     m.fire()
-    time.sleep(5)
+    time.sleep(6)
