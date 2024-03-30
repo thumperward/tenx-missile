@@ -29,8 +29,9 @@ class MissileLauncher(object):
             raise ValueError("Missile Launcher not found. Is it connected?")
 
         def _get_interface(num):
-            if self._device.is_kernel_driver_active(num):
-                self._device.detach_kernel_driver(num)
+            # TODO: kernel drive check is Linux-only
+            # if self._device.is_kernel_driver_active(num):
+            #     self._device.detach_kernel_driver(num)
             usb.util.claim_interface(self._device, num)
             usb.util.release_interface(self._device, num)
 

@@ -1,0 +1,21 @@
+{
+	"name": "tenx_missile",
+	"image": "mcr.microsoft.com/vscode/devcontainers/base:debian-12",
+	"features": {
+		"ghcr.io/devcontainers/features/python": {},
+		"ghcr.io/devcontainers-contrib/features/markdownlint-cli": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"bungcip.better-toml",
+				"DavidAnson.vscode-markdownlint",
+			]
+		}
+	},
+	"postCreateCommand": {
+		"poetry": "pipx install poetry && poetry install",
+		"pre-commit": "pipx install pre-commit && pre-commit install"
+	}
+}
